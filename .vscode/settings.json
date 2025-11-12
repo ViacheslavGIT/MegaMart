@@ -1,0 +1,27 @@
+{
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "editor.minimap.enabled": true,
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "files.autoSave": "onFocusChange",
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "es5",
+  "prettier.semi": true,
+  "prettier.printWidth": 100,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "tailwindCSS.includeLanguages": {
+    "typescriptreact": "html"
+  },
+  "errorLens.enabled": true,
+  "errorLens.fontWeight": "bold",
+  "workbench.iconTheme": "material-icon-theme",
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true
+}
+

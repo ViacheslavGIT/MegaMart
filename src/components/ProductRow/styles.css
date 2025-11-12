@@ -1,0 +1,297 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
+
+/* ===== Контейнер ===== */
+.products-wrapper .product-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+  justify-items: center;
+  margin: 40px auto;
+  max-width: 1300px;
+  padding: 20px;
+  font-family: 'Montserrat', sans-serif;
+  transition: opacity 0.3s ease;
+}
+
+/* ===== Карточка товара ===== */
+.products-wrapper .product-card {
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  overflow: visible;
+  cursor: pointer;
+  transform: translateZ(0);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  will-change: transform, box-shadow;
+}
+
+.products-wrapper .product-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 38px rgba(0, 122, 255, 0.25);
+}
+
+/* ===== Изображение ===== */
+.products-wrapper .product-thumb {
+  position: relative;
+  background: rgba(255, 255, 255, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 220px;
+  border-radius: 22px 22px 0 0;
+  overflow: hidden;
+}
+
+.products-wrapper .product-img {
+  max-height: 80%;
+  max-width: 80%;
+  object-fit: contain;
+  transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.4s ease;
+  will-change: transform, opacity;
+}
+
+.products-wrapper .product-card:hover .product-img {
+  transform: scale(1.06);
+}
+
+/* ===== Бейдж скидки ===== */
+.products-wrapper .badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: #ff3b30;
+  color: white;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Сердце ===== */
+.products-wrapper .heart-btn {
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.products-wrapper .heart-btn svg {
+  color: #fff !important;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.7));
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.products-wrapper .heart-btn:hover svg,
+.products-wrapper .heart-btn.active svg {
+  transform: scale(1.1);
+  color: #ff3b30 !important;
+}
+
+/* ===== Текст ===== */
+.products-wrapper .product-info {
+  padding: 16px 14px 20px;
+  text-align: center;
+}
+
+.products-wrapper .product-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 6px;
+  min-height: 40px;
+  overflow: hidden;
+}
+
+.products-wrapper .product-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #007aff;
+  margin-bottom: 4px;
+}
+
+.products-wrapper .product-save {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 16px;
+}
+
+/* ===== Кнопки ===== */
+.products-wrapper .add-btn,
+.products-wrapper .checkout-btn {
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  font-size: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.products-wrapper .add-btn {
+  background: linear-gradient(135deg, #00c853, #009624);
+  margin-bottom: 8px;
+}
+
+.products-wrapper .checkout-btn {
+  background: linear-gradient(135deg, #007aff, #0056b3);
+}
+
+.products-wrapper .add-btn:hover,
+.products-wrapper .checkout-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* ===== Модалка ===== */
+.products-wrapper .modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.products-wrapper .modal-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.products-wrapper .modal-content {
+  background: rgba(255, 255, 255, 0.808);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  max-width: 860px;
+  width: 90%;
+  padding: 30px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+  transform: scale(0.97);
+  opacity: 0;
+  animation: modalFade 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== Контент модалки ===== */
+.products-wrapper .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.products-wrapper .modal-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.products-wrapper .close-btn {
+  background: rgba(0, 0, 0, 0.2);
+  border: none;
+  font-size: 18px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.products-wrapper .close-btn:hover {
+  background: rgba(255, 59, 48, 0.75);
+  transform: scale(1.1);
+}
+
+.products-wrapper .modal-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: #000000;
+}
+
+.products-wrapper .modal-img {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.products-wrapper .modal-img img {
+  max-width: 100%;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 16px;
+}
+
+.products-wrapper .modal-text {
+  flex: 1 1 300px;
+}
+
+.products-wrapper .modal-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* ===== Адаптив ===== */
+@media (max-width: 768px) {
+  .products-wrapper .modal-body {
+    flex-direction: column;
+  }
+
+  .products-wrapper .product-row {
+    gap: 20px;
+  }
+
+  .products-wrapper .product-card {
+    max-width: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-wrapper .product-card {
+    max-width: 200px;
+  }
+
+  .products-wrapper .product-thumb {
+    height: 180px;
+  }
+
+  .products-wrapper .product-title {
+    font-size: 14px;
+  }
+
+  .products-wrapper .product-price {
+    font-size: 16px;
+  }
+}

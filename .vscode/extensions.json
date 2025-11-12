@@ -1,0 +1,27 @@
+{
+  "recommendations": [
+    "dsznajder.es7-react-js-snippets",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-rename-tag",
+    "naumovs.color-highlight",
+    "ecmel.vscode-html-css",
+    "christian-kohler.path-intellisense",
+    "usernamehw.errorlens",
+    "streetsidesoftware.code-spell-checker",
+    "eamodio.gitlens",
+    "ritwickdey.liveserver",
+    "PKief.material-icon-theme",
+    "pranaygp.vscode-css-peek",
+    "oderwat.indent-rainbow",
+    "xabikos.javascriptsnippets",
+    "VisualStudioExptTeam.vscodeintellicode",
+    "VisualStudioExptTeam.intellicode-api-usage-examples",
+    "michelemelluso.code-beautifier",
+    "rangav.vscode-thunder-client",
+    "wallabyjs.console-ninja",
+    "mgmcdermott.vscode-language-babel",
+    "ms-vscode.vscode-typescript-next"
+  ]
+}

@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
+
+/* ===== Контейнер ===== */
+.brands-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin: 50px auto;
+  width: 100%;
+  max-width: 900px;
+  min-height: 70px; /* предотвращает "прыжок" */
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity: 1;
+  transform: translateY(0);
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Состояния загрузки */
+.brands-row.loading {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+}
+
+.brands-row.loaded {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ===== Элемент бренда ===== */
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  border-radius: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #1d1d1f;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover эффект */
+.brand-link:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #00c853, #009624);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(0, 200, 83, 0.35);
+}
+
+/* Активный бренд */
+.brand-link.active {
+  background: linear-gradient(135deg, #00c853, #009624);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(0, 122, 255, 0.3);
+}
+
+/* Световой эффект при ховере */
+.brand-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: radial-gradient(circle at top center, rgba(255, 255, 255, 0.35) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.brand-link:hover::after {
+  opacity: 1;
+}
+
+/* ===== Скелет-заглушка ===== */
+.brand-skeleton {
+  width: 100px;
+  height: 40px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  animation: pulse 1.6s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ===== Плавное появление ===== */
+@keyframes fadeSmooth {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Мобильная адаптация ===== */
+@media (max-width: 768px) {
+  .brands-row {
+    gap: 14px;
+    padding: 0 10px;
+  }
+
+  .brand-link {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .brand-skeleton {
+    width: 80px;
+    height: 34px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brands-row {
+    overflow-x: auto;
+    justify-content: flex-start;
+    scroll-snap-type: x mandatory;
+    padding: 10px 15px;
+  }
+
+  .brand-link,
+  .brand-skeleton {
+    flex-shrink: 0;
+    scroll-snap-align: center;
+  }
+}

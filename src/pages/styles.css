@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
+
+/* ====== Общая обёртка ====== */
+.products-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(135deg, #f9fafb, #e9eef2);
+}
+
+.products-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 100vh;
+  padding: 80px 20px;
+  font-family: 'Montserrat', sans-serif;
+  color: #1c1c1e;
+  box-sizing: border-box;
+  opacity: 0;
+  animation: fadeInSmooth 0.6s ease forwards;
+}
+
+@keyframes fadeInSmooth {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ====== Сетка ====== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 35px;
+  justify-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* ====== Карточка товара ====== */
+.product-card {
+  width: 100%;
+  max-width: 280px;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 22px;
+  padding: 26px 20px;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  text-align: center;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  will-change: transform, box-shadow;
+
+  /* плавное появление */
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeCard 0.6s ease forwards;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.3s ease;
+}
+
+@keyframes fadeCard {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* эффект плавного подъёма без дерганий */
+.product-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 38px rgba(0, 122, 255, 0.22);
+}
+
+/* Эффект каскада */
+.product-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.product-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.product-card:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.product-card:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.product-card:nth-child(5) {
+  animation-delay: 0.25s;
+}
+.product-card:nth-child(6) {
+  animation-delay: 0.3s;
+}
+
+/* ====== Изображение ====== */
+.product-thumb {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.product-img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 14px;
+  background: rgba(250, 250, 250, 0.9);
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.05);
+  transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.6s ease;
+  will-change: transform;
+  transform-origin: center center;
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.04);
+  box-shadow: 0 6px 18px rgba(0, 122, 255, 0.15);
+}
+
+/* ====== Текст ====== */
+.product-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  margin: 8px 0 4px;
+}
+
+.product-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #007aff;
+  margin-bottom: 4px;
+}
+
+.product-save {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+/* ====== Кнопка добавления ====== */
+.add-btn {
+  background: linear-gradient(135deg, #00c853, #009624);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  box-shadow: 0 4px 18px rgba(0, 200, 83, 0.25);
+}
+
+.add-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* ====== Сердце ====== */
+.heart-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.heart-btn svg {
+  color: #555;
+  font-size: 20px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.heart-btn:hover svg {
+  transform: scale(1.1);
+  color: #ff3b30;
+}
+
+.heart-btn.active {
+  background: linear-gradient(135deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+  animation: heartPulse 0.6s ease;
+}
+
+.heart-btn.active svg {
+  color: #fff;
+  transform: scale(1.25);
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.7));
+}
+
+@keyframes heartPulse {
+  0% {
+    transform: scale(0.9);
+  }
+  40% {
+    transform: scale(1.3);
+  }
+  70% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ====== Скелетон ====== */
+.skeleton {
+  background: rgba(240, 240, 240, 0.9);
+  border-radius: 22px;
+  min-height: 360px;
+  width: 100%;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  animation: pulse 1.6s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ====== Адаптив ====== */
+@media (max-width: 768px) {
+  .products-page {
+    padding: 60px 16px;
+  }
+  .product-grid {
+    gap: 22px;
+  }
+  .product-card {
+    max-width: 230px;
+    min-height: 320px;
+    padding: 18px;
+  }
+  .product-img {
+    height: 150px;
+  }
+}

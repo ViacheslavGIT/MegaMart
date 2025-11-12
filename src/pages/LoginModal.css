@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600&display=swap');
+
+/* ——— Фон модалки ——— */
+.login-wrapper {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(17, 17, 17, 0.45);
+  backdrop-filter: blur(18px);
+  z-index: 2000;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ——— Модальное окно ——— */
+.login-container {
+  width: 100%;
+  max-width: 460px;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.login-box {
+  position: relative;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(20px);
+  border-radius: 28px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+  padding: 60px 50px 50px;
+  font-family: 'Inter', 'Montserrat', sans-serif;
+  animation: slideUp 0.45s ease forwards;
+  text-align: center;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ——— Кнопка закрытия ——— */
+.close-login-btn {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.close-login-btn:hover {
+  color: #94261f;
+  transform: rotate(90deg);
+}
+
+/* ——— Контент и заголовок ——— */
+.login-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.login-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 8px;
+}
+
+/* ——— Поля ввода ——— */
+.login-fields {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-fields input {
+  width: 100%;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+  color: #111;
+  outline: none;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+}
+
+.login-fields input:focus {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.25);
+}
+
+/* ——— Сообщения ——— */
+.error-msg {
+  color: #ff3b30;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: -6px;
+}
+
+.success-msg {
+  color: #00c853;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: -6px;
+}
+
+/* ——— Кнопка отправки ——— */
+.login-submit {
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #007aff, #0059d6);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0, 122, 255, 0.25);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.login-submit:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+/* ——— Подвал формы ——— */
+.login-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  color: #333;
+  margin-top: 10px;
+}
+
+.login-footer span {
+  color: #007aff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.login-footer span:hover {
+  color: #0056b3;
+}
+
+/* ——— Мобильная адаптация ——— */
+@media (max-width: 480px) {
+  .login-box {
+    padding: 50px 26px 40px;
+  }
+
+  .login-title {
+    font-size: 22px;
+  }
+}
+.login-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(30%);
+  box-shadow: none;
+  transform: none;
+}

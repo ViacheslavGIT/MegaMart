@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
+
+/* ===== Контейнер ===== */
+.categories-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin: 60px auto;
+  padding: 10px;
+  width: 100%;
+  max-width: 1000px;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1;
+}
+
+/* ===== Элемент категории ===== */
+.category-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  gap: 10px;
+  border-radius: 20px;
+  width: 140px;
+  height: 120px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: #1d1d1f;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  text-align: center;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* ===== Hover эффект ===== */
+.category-link:hover {
+  transform: translateY(-4px);
+  background: linear-gradient(135deg, #00c853, #009624);
+  color: #fff;
+  box-shadow: 0 10px 35px rgba(0, 200, 83, 0.3);
+}
+
+/* ===== Активная категория ===== */
+.category-link.active {
+  background: linear-gradient(135deg, #00c853, #009624);
+  color: #fff;
+  box-shadow: 0 10px 40px rgba(0, 122, 255, 0.3);
+}
+
+/* ===== Мягкое внутреннее свечение ===== */
+.category-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.category-link:hover::after {
+  opacity: 1;
+}
+
+/* ===== Иконки ===== */
+.category-link svg {
+  font-size: 24px;
+  transition: transform 0.25s ease, color 0.25s ease;
+  color: #000000;
+}
+
+.category-link:hover svg {
+  transform: scale(1.1);
+  color: #fff;
+}
+
+/* ===== Анимация появления ===== */
+.categories-row.fade-in {
+  opacity: 0;
+  animation: fadeSmooth 0.6s ease-out forwards;
+}
+
+@keyframes fadeSmooth {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ===== Мобильная адаптация ===== */
+@media (max-width: 768px) {
+  .categories-row {
+    gap: 18px;
+  }
+
+  .category-link {
+    width: 110px;
+    height: 100px;
+    font-size: 14px;
+  }
+
+  .category-link svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .categories-row {
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 10px 15px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .category-link {
+    flex-shrink: 0;
+    scroll-snap-align: center;
+    width: 100px;
+    height: 90px;
+  }
+}
