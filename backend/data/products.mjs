@@ -1,5 +1,4 @@
-
-const Product = [
+const products = [
   // Smartphones
   {
     name: 'iPhone 15 Pro',
@@ -104,9 +103,7 @@ const Product = [
   { name: 'ASUS ZenBook 14', brand: 'ASUS', category: 'Laptops', price: 1399, off: 10, img: "/assets/asus.jpg" },
   { name: 'Acer Swift 5', brand: 'Acer', category: 'Laptops', price: 1199, off: 8, img: "/assets/aser.jpg" },
   { name: 'Razer Blade 16', brand: 'Razer', category: 'Laptops', price: 2999, off: 5, img: "/assets/razer.jpg" },
-
   { name: 'MSI Stealth 14', brand: 'MSI', category: 'Laptops', price: 1599, off: 10, img: "/assets/MSi.jpg" },
-
   {
     name: 'Gigabyte Aero 16',
     brand: 'Gigabyte',
@@ -115,7 +112,6 @@ const Product = [
     off: 9,
     img: "/assets/aero.jpg",
   },
-
   {
     name: 'Samsung Galaxy Book 3',
     brand: 'Samsung',
@@ -247,10 +243,9 @@ const Product = [
   { name: 'Fossil Gen 6', brand: 'Fossil', category: 'Watches', price: 299, off: 10, img: "/assets/pords.jpg" },
   { name: 'TicWatch Pro 5', brand: 'Mobvoi', category: 'Watches', price: 349, off: 9, img: "/assets/pords.jpg" },
 
-  // Other categories (placeholders)
   { name: 'Coming Soon', brand: '-', category: 'TVs', price: 0, off: 0 },
   { name: 'Coming Soon', brand: '-', category: 'Cameras', price: 0, off: 0 },
   { name: 'Coming Soon', brand: '-', category: 'Accessories', price: 0, off: 0 },
 ];
 
-export default Product
+export default products;
