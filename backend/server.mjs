@@ -10,28 +10,29 @@ import http from "http";
 import { WebSocketServer } from "ws";
 import fetch from "node-fetch";
 
+// ====== PATH FIX ======
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ====== LOAD .env ======
+// ====== ENV LOADING ======
 dotenv.config({ path: path.join(__dirname, ".env") });
-
-// Fix for Render — ALWAYS use MONGO_URI
 const MONGO = process.env.MONGO_URI;
 
-if (!MONGO) {
-  console.error("❌ ERROR: Missing MONGO_URI in environment variables!");
-}
+if (!MONGO) console.error("❌ ERROR: Missing MONGO_URI!");
 
+// ====== APP INIT ======
 const app = express();
-app.use(cors({
-  origin: "*",
-  methods: "GET,POST,PUT,DELETE",
-  allowedHeaders: "Content-Type, Authorization",
-}));
+app.use(
+  cors({
+    origin: "*",
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type, Authorization",
+  })
+);
+
 app.use(express.json({ limit: "20mb" }));
 
-// ====== DATABASE CONNECTION ======
+// ====== DATABASE ======
 let smartAssistantReply;
 
 mongoose
@@ -44,7 +45,7 @@ mongoose
 
     console.log("🧠 Smart Assistant ready");
   })
-  .catch((err) => console.error("❌ MongoDB connection error:", err));
+  .catch((err) => console.error("❌ MongoDB error:", err));
 
 // ====== SCHEMAS ======
 const productSchema = new mongoose.Schema({
@@ -59,8 +60,8 @@ const productSchema = new mongoose.Schema({
 const Product = mongoose.model("Product", productSchema);
 
 const userSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  email: { type: String, unique: true },
+  password: String,
   isAdmin: { type: Boolean, default: false },
   favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
 });
@@ -68,7 +69,7 @@ const User = mongoose.model("User", userSchema);
 
 const orderSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     items: [
       {
         productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
@@ -78,37 +79,25 @@ const orderSchema = new mongoose.Schema(
       },
     ],
     total: Number,
-    address: {
-      name: String,
-      phone: String,
-      email: String,
-      country: String,
-      city: String,
-      address: String,
-    },
+    address: Object,
     createdAt: { type: Date, default: Date.now },
   },
   { versionKey: false }
 );
 const Order = mongoose.model("Order", orderSchema);
 
-// ====== TOKEN MIDDLEWARE ======
+// ====== MIDDLEWARE ======
 function verifyToken(req, res, next) {
   const header = req.headers.authorization;
   if (!header) return res.status(401).json({ message: "No token" });
 
   const token = header.split(" ")[1];
+
   jwt.verify(token, process.env.JWT_SECRET || "secretkey", (err, decoded) => {
     if (err) return res.status(403).json({ message: "Invalid token" });
     req.user = decoded;
     next();
   });
-}
-
-function verifyAdmin(req, res, next) {
-  if (!req.user?.isAdmin)
-    return res.status(403).json({ message: "Admin access only" });
-  next();
 }
 
 // ====== AUTH ======
@@ -161,17 +150,51 @@ app.post("/api/auth/login", async (req, res) => {
 });
 
 // ====== PRODUCTS ======
+
+// 🟢 1) Все товары
 app.get("/api/products", async (req, res) => {
   try {
     const products = await Product.find({});
     res.json(products);
-  } catch (err) {
-    console.error("Error loading products:", err);
+  } catch {
     res.status(500).json({ message: "Error loading products" });
   }
 });
 
-// ====== AI CHAT / WEBSOCKET ======
+// 🟢 2) Фильтрация (фронту ОБЯЗАТЕЛЬНО)
+app.get("/api/products/filter", async (req, res) => {
+  try {
+    let { category, brand, page = 1, limit = 20 } = req.query;
+
+    const query = {};
+    if (category && category !== "undefined")
+      query.category = { $regex: category, $options: "i" };
+
+    if (brand && brand !== "undefined")
+      query.brand = { $regex: brand, $options: "i" };
+
+    page = Number(page);
+    limit = Number(limit);
+    const skip = (page - 1) * limit;
+
+    const [products, total] = await Promise.all([
+      Product.find(query).skip(skip).limit(limit),
+      Product.countDocuments(query),
+    ]);
+
+    res.json({
+      products,
+      page,
+      total,
+      pages: Math.ceil(total / limit),
+    });
+  } catch (err) {
+    console.error("Error filtering products:", err);
+    res.status(500).json({ message: "Error filtering products" });
+  }
+});
+
+// ====== AI CHAT ======
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
 
@@ -179,42 +202,33 @@ wss.on("connection", (ws) => {
   console.log("💬 Chat connected");
 
   ws.on("message", async (msg) => {
-    const text = msg.toString().trim();
+    const text = msg.toString();
 
     try {
       if (!smartAssistantReply) {
-        ws.send(JSON.stringify({ text: "🤖 Асистент завантажується..." }));
-        return;
+        return ws.send(JSON.stringify({ text: "🤖 Асистент завантажується..." }));
       }
 
       const localReply = await smartAssistantReply(text);
-      if (localReply) {
-        ws.send(JSON.stringify({ text: localReply }));
-        return;
-      }
+      if (localReply) return ws.send(JSON.stringify({ text: localReply }));
 
-      const response = await fetch(
-        "https://openrouter.ai/api/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${process.env.OPENROUTER_KEY}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model: "mistralai/mistral-7b-instruct",
-            messages: [
-              { role: "user", content: text }
-            ],
-          }),
-        }
-      );
+      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${process.env.OPENROUTER_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "mistralai/mistral-7b-instruct",
+          messages: [{ role: "user", content: text }],
+        }),
+      });
 
       const data = await response.json();
       const reply = data?.choices?.[0]?.message?.content;
 
       ws.send(JSON.stringify({ text: reply || "Помилка AI" }));
-    } catch (err) {
+    } catch {
       ws.send(JSON.stringify({ text: "⚠️ Помилка сервера AI" }));
     }
   });
@@ -225,4 +239,3 @@ const PORT = process.env.PORT || 5000;
 server.listen(PORT, () =>
   console.log(`🚀 Server running on port ${PORT}`)
 );
-
