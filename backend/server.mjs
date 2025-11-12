@@ -216,13 +216,6 @@ wss.on("connection", (ws) => {
   });
 });
 
-// ====== SERVE FRONTEND (Vercel/Render static) ======
-const distPath = path.join(__dirname, "../../dist");
-app.use(express.static(distPath));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(distPath, "index.html"));
-});
-
 // ====== START ======
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () =>
