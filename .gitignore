@@ -1,17 +1,6 @@
-node_modules/
-dist/
-build/
-
-# Env
+node_modules
+dist
+.backend-node_modules
+backend/node_modules
 .env
-.env.local
-
-# Logs
-*.log
-
-# Vite temp
-vite.config.ts.timestamp-*
-
-# System
 .DS_Store
-Thumbs.db
