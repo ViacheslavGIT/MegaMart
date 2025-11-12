@@ -7,10 +7,14 @@
     "start": "node server.mjs"
   },
   "dependencies": {
-    "express": "^5.1.0",
+    "axios": "^1.7.9",
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.20.0",
-    "mongoose": "^8.19.2"
+    "mongoose": "^8.19.2",
+    "ws": "^8.18.3"
   }
 }
