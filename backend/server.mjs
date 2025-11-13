@@ -8,18 +8,20 @@ import http from "http";
 import { WebSocketServer } from "ws";
 import fetch from "node-fetch";
 
-dotenv.config(); // Render автоматически загружает переменные среды
+// Загружаем переменные окружения
+dotenv.config();
 
 // ================== ENV =====================
 const MONGO = process.env.MONGO_URL;
 const JWT_SECRET = process.env.JWT_SECRET || "secretkey";
+const OPENROUTER_KEY = process.env.OPENROUTER_KEY || "";
 
 if (!MONGO) {
   console.error("❌ ERROR: MONGO_URL IS MISSING!");
   process.exit(1);
 }
 
-// ================== DB SCHEMAS =====================
+// ================== SCHEMAS =====================
 const productSchema = new mongoose.Schema({
   name: String,
   brand: String,
@@ -61,14 +63,21 @@ const Order = mongoose.model("Order", orderSchema);
 
 // ================== APP INIT =====================
 const app = express();
-app.use(cors({ origin: "*"}));
+app.use(
+  cors({
+    origin: "*",
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type, Authorization",
+  })
+);
+
 app.use(express.json({ limit: "20mb" }));
 
 // ================== DB CONNECT =====================
 mongoose
   .connect(MONGO)
   .then(() => console.log("✅ MongoDB connected"))
-  .catch(err => console.error("❌ MongoDB error:", err));
+  .catch((err) => console.error("❌ MongoDB error:", err));
 
 // ================== AUTH MIDDLEWARE =====================
 function verifyToken(req, res, next) {
@@ -98,9 +107,11 @@ app.post("/api/auth/register", async (req, res) => {
     const user = new User({ email, password: hashed, isAdmin });
     await user.save();
 
-    const token = jwt.sign({ id: user._id, email, isAdmin }, JWT_SECRET, {
-      expiresIn: "7d",
-    });
+    const token = jwt.sign(
+      { id: user._id, email: user.email, isAdmin },
+      JWT_SECRET,
+      { expiresIn: "7d" }
+    );
 
     res.status(201).json({ token, email, isAdmin });
   } catch {
@@ -149,8 +160,14 @@ app.get("/api/products/filter", async (req, res) => {
     let { category, brand, page = 1, limit = 20 } = req.query;
 
     const query = {};
-    if (category) query.category = { $regex: category, $options: "i" };
-    if (brand) query.brand = { $regex: brand, $options: "i" };
+    if (category && category !== "undefined")
+      query.category = { $regex: category, $options: "i" };
+
+    if (brand && brand !== "undefined")
+      query.brand = { $regex: brand, $options: "i" };
+
+    page = Number(page);
+    limit = Number(limit);
 
     const skip = (page - 1) * limit;
 
@@ -166,41 +183,46 @@ app.get("/api/products/filter", async (req, res) => {
       pages: Math.ceil(total / limit),
     });
   } catch (err) {
-    console.error("Filter error:", err);
     res.status(500).json({ message: "Error filtering products" });
   }
 });
 
-// ================== AI CHAT + WS =====================
+// ================== AI CHAT =====================
 let smartAssistantReply = null;
 
-import("./smartAssistant.mjs").then(module => {
-  smartAssistantReply = module.smartAssistantReply;
-  console.log("🧠 Smart Assistant loaded");
+import("./smartAssistant.mjs").then((m) => {
+  smartAssistantReply = m.smartAssistantReply;
+  console.log("🧠 Smart Assistant ready");
 });
 
+// ================== WebSocket =====================
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
 
-wss.on("connection", ws => {
-  ws.on("message", async msg => {
+wss.on("connection", (ws) => {
+  console.log("💬 Chat connected");
+
+  ws.on("message", async (msg) => {
     const text = msg.toString();
 
-    if (!smartAssistantReply) {
-      return ws.send(JSON.stringify({ text: "🤖 Loading assistant..." }));
-    }
-
     try {
-      const local = await smartAssistantReply(text);
-      if (local) return ws.send(JSON.stringify({ text: local }));
+      if (!smartAssistantReply) {
+        return ws.send(
+          JSON.stringify({ text: "🤖 Асистент завантажується..." })
+        );
+      }
+
+      const localReply = await smartAssistantReply(text);
+      if (localReply) return ws.send(JSON.stringify({ text: localReply }));
     } catch {}
 
-    ws.send(JSON.stringify({ text: "AI response is disabled on Render demo." }));
+    ws.send(JSON.stringify({ text: "⚠️ AI недоступний у демо-режимі" }));
   });
 });
 
 // ================== START =====================
 const PORT = process.env.PORT || 5000;
+
 server.listen(PORT, () =>
   console.log(`🚀 Server running on port ${PORT}`)
 );
