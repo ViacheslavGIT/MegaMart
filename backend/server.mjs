@@ -15,8 +15,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // ====== ENV LOADING ======
-dotenv.config({ path: path.join(__dirname, ".env") });
-const MONGO = process.env.MONGO_URI;
+dotenv.config();
+const MONGO = process.env.MONGO_URL;
+
 
 if (!MONGO) console.error("❌ ERROR: Missing MONGO_URI!");
 
