@@ -1,4 +1,4 @@
-/* ——— Overlay ——— */
+
 .cart-overlay {
   position: fixed;
   inset: 0;
@@ -18,12 +18,12 @@
   pointer-events: auto;
 }
 
-/* ——— Cart modal ——— */
+
 .cart-modal {
   width: 95%;
   max-width: 700px;
   min-height: 520px;
-  max-height: 520px; /* ← фиксируем строго одну высоту */
+  max-height: 520px; 
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(22px);
   border-radius: 28px;
@@ -49,7 +49,7 @@
   }
 }
 
-/* ——— Header ——— */
+
 .cart-header {
   flex-shrink: 0;
   display: flex;
@@ -66,7 +66,7 @@
   color: #000;
 }
 
-/* ——— Close button ——— */
+
 .close-btn {
   width: 40px;
   height: 40px;
@@ -88,7 +88,7 @@
   transform: scale(1.05);
 }
 
-/* ——— Items ——— */
+
 .cart-items {
   flex: 1;
   overflow-y: auto;
@@ -100,7 +100,7 @@
   transition: none;
 }
 
-/* карточки товаров — без увеличений */
+
 .cart-item {
   display: flex;
   align-items: center;
@@ -140,7 +140,7 @@
   color: #666;
 }
 
-/* ——— Remove button ——— */
+
 .remove-btn {
   background: transparent;
   border: none;
@@ -153,7 +153,7 @@
   color: #d32f2f;
 }
 
-/* ——— Footer ——— */
+
 .cart-footer {
   flex-shrink: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
@@ -167,7 +167,7 @@
   font-weight: 600;
 }
 
-/* ——— Buttons ——— */
+
 .cart-actions {
   display: flex;
   gap: 14px;
@@ -204,7 +204,7 @@
   box-shadow: 0 6px 18px rgba(0, 113, 227, 0.25);
 }
 
-/* ——— Scroll ——— */
+
 .cart-items::-webkit-scrollbar {
   width: 6px;
 }
@@ -213,7 +213,7 @@
   border-radius: 10px;
 }
 
-/* ——— Mobile ——— */
+
 @media (max-width: 480px) {
   .cart-modal {
     width: 95%;
@@ -223,7 +223,7 @@
   }
 }
 
-/* ——— Отключаем скролл фона при открытой корзине ——— */
+
 body.cart-open {
   overflow: hidden;
   position: fixed;

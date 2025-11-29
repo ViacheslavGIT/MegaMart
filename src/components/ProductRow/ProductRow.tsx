@@ -17,7 +17,6 @@ export default function ProductRow() {
   const [favorites, setFavorites] = useState<string[]>([]);
   const token = localStorage.getItem("token");
 
-  // ✅ Загрузка избранного с сервера
   useEffect(() => {
     if (!isUser || !token) return;
     const fetchFavorites = async () => {
@@ -38,7 +37,6 @@ export default function ProductRow() {
     fetchFavorites();
   }, [isUser, token]);
 
-  // ❤️ Добавление / удаление из избранного
   const toggleFavorite = async (id?: string) => {
     if (!id) return;
     if (!isUser || !token) {
@@ -63,7 +61,6 @@ export default function ProductRow() {
     }
   };
 
-  // ⚙️ Управление модалкой
   useEffect(() => {
     if (selectedProduct) {
       setShowModal(true);
@@ -138,7 +135,6 @@ export default function ProductRow() {
         })}
       </div>
 
-      {/* ✅ Модалка */}
       {showModal && selectedProduct && (
         <div
           className="modal-overlay show"

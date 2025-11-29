@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
 
-/* ===== Контейнер ===== */
+
 .categories-row {
   display: flex;
   justify-content: center;
@@ -14,7 +14,7 @@
   opacity: 1;
 }
 
-/* ===== Элемент категории ===== */
+
 .category-link {
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@
   position: relative;
 }
 
-/* ===== Hover эффект ===== */
+
 .category-link:hover {
   transform: translateY(-4px);
   background: linear-gradient(135deg, #00c853, #009624);
@@ -45,14 +45,14 @@
   box-shadow: 0 10px 35px rgba(0, 200, 83, 0.3);
 }
 
-/* ===== Активная категория ===== */
+
 .category-link.active {
   background: linear-gradient(135deg, #00c853, #009624);
   color: #fff;
   box-shadow: 0 10px 40px rgba(0, 122, 255, 0.3);
 }
 
-/* ===== Мягкое внутреннее свечение ===== */
+
 .category-link::after {
   content: '';
   position: absolute;
@@ -67,7 +67,7 @@
   opacity: 1;
 }
 
-/* ===== Иконки ===== */
+
 .category-link svg {
   font-size: 24px;
   transition: transform 0.25s ease, color 0.25s ease;
@@ -79,7 +79,7 @@
   color: #fff;
 }
 
-/* ===== Анимация появления ===== */
+
 .categories-row.fade-in {
   opacity: 0;
   animation: fadeSmooth 0.6s ease-out forwards;
@@ -94,7 +94,7 @@
   }
 }
 
-/* ===== Мобильная адаптация ===== */
+
 @media (max-width: 768px) {
   .categories-row {
     gap: 18px;

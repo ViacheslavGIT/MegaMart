@@ -13,12 +13,10 @@ export default function Header() {
   const { isAdmin, isUser, logout } = useAuth();
   const navigate = useNavigate();
 
-  // фиксируем body при открытой корзине
   useEffect(() => {
     document.body.style.overflow = openCart ? "hidden" : "";
   }, [openCart]);
 
-  // следим за прокруткой
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", onScroll);

@@ -28,7 +28,7 @@
   margin-top: 25px;
 }
 
-/* ——— Сетка избранного ——— */
+
 .favorites-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
@@ -37,7 +37,7 @@
   justify-items: center;
 }
 
-/* ——— Карточки избранного ——— */
+
 .favorite-card {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
@@ -85,7 +85,7 @@
   margin-top: 6px;
 }
 
-/* ——— Кнопки ——— */
+
 .primary-btn,
 .logout-btn {
   margin-top: 35px;
@@ -116,7 +116,7 @@
   opacity: 0.9;
 }
 
-/* ——— Анимация ——— */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -155,7 +155,7 @@
   color: #444;
 }
 
-/* ——— Адаптивность ——— */
+
 @media (max-width: 768px) {
   .account-title {
     font-size: 26px;

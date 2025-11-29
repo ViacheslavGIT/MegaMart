@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
 
-/* ====== Общая обёртка ====== */
 .products-wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
-  background: linear-gradient(135deg, #f9fafb, #e9eef2);
+  background: linear-gradient(180deg, #f6f8fb 0%, #eef2f7 60%, #e5e9ef 100%);
+  padding: 0 12px;
 }
 
 .products-page {
@@ -15,249 +15,276 @@
   width: 100%;
   max-width: 1200px;
   min-height: 100vh;
-  padding: 80px 20px;
+  padding: 90px 12px 60px;
   font-family: 'Montserrat', sans-serif;
-  color: #1c1c1e;
+  color: #0f172a;
   box-sizing: border-box;
-  opacity: 0;
   animation: fadeInSmooth 0.6s ease forwards;
+  gap: 18px;
 }
 
 @keyframes fadeInSmooth {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* ====== Сетка ====== */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 35px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 22px;
   justify-items: center;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
-/* ====== Карточка товара ====== */
 .product-card {
   width: 100%;
   max-width: 280px;
-  background: rgba(255, 255, 255, 0.55);
-  border-radius: 22px;
-  padding: 26px 20px;
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.86);
+  border-radius: 20px;
+  padding: 22px 18px;
+  box-shadow: 0 16px 34px rgba(6, 33, 68, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.7);
   text-align: center;
-  min-height: 360px;
+  min-height: 340px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
   overflow: hidden;
-  will-change: transform, box-shadow;
-
-  /* плавное появление */
-  opacity: 0;
-  transform: translateY(12px);
-  animation: fadeCard 0.6s ease forwards;
-  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
-@keyframes fadeCard {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* эффект плавного подъёма без дерганий */
 .product-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 12px 38px rgba(0, 122, 255, 0.22);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px rgba(10, 132, 255, 0.16);
 }
 
-/* Эффект каскада */
-.product-card:nth-child(1) {
-  animation-delay: 0.05s;
-}
-.product-card:nth-child(2) {
-  animation-delay: 0.1s;
-}
-.product-card:nth-child(3) {
-  animation-delay: 0.15s;
-}
-.product-card:nth-child(4) {
-  animation-delay: 0.2s;
-}
-.product-card:nth-child(5) {
-  animation-delay: 0.25s;
-}
-.product-card:nth-child(6) {
-  animation-delay: 0.3s;
-}
-
-/* ====== Изображение ====== */
 .product-thumb {
   position: relative;
   margin-bottom: 12px;
 }
 
-.product-img {
+.product-img,
+.product-thumb img {
   width: 100%;
   height: 180px;
   object-fit: contain;
   border-radius: 14px;
-  background: rgba(250, 250, 250, 0.9);
-  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.05);
-  transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.6s ease;
-  will-change: transform;
-  transform-origin: center center;
+  background: #f7f8fa;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 8px 20px rgba(6, 33, 68, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.product-card:hover .product-img {
+.product-card:hover .product-img,
+.product-card:hover .product-thumb img {
   transform: scale(1.04);
-  box-shadow: 0 6px 18px rgba(0, 122, 255, 0.15);
+  box-shadow: 0 12px 26px rgba(10, 132, 255, 0.14);
 }
 
-/* ====== Текст ====== */
-.product-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #111;
-  margin: 8px 0 4px;
-}
-
-.product-price {
-  font-size: 18px;
-  font-weight: 700;
-  color: #007aff;
-  margin-bottom: 4px;
-}
-
-.product-save {
-  font-size: 13px;
-  color: #6b7280;
-  margin-bottom: 10px;
-}
-
-/* ====== Кнопка добавления ====== */
-.add-btn {
-  background: linear-gradient(135deg, #00c853, #009624);
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: linear-gradient(135deg, #0a84ff, #147ce5);
   color: #fff;
-  font-weight: 600;
-  border: none;
+  padding: 6px 12px;
   border-radius: 12px;
-  padding: 10px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  box-shadow: 0 4px 18px rgba(0, 200, 83, 0.25);
+  font-weight: 700;
+  font-size: 12px;
+  box-shadow: 0 8px 18px rgba(10, 132, 255, 0.2);
 }
 
-.add-btn:hover {
-  transform: translateY(-2px);
-  opacity: 0.9;
-}
-
-/* ====== Сердце ====== */
 .heart-btn {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.6);
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  border: 1px solid rgba(12, 12, 13, 0.08);
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease;
+  box-shadow: 0 10px 20px rgba(6, 33, 68, 0.1);
 }
 
 .heart-btn svg {
   color: #555;
-  font-size: 20px;
-  transition: transform 0.3s ease, color 0.3s ease;
+  font-size: 18px;
+  transition: transform 0.25s ease, color 0.25s ease;
 }
 
-.heart-btn:hover svg {
-  transform: scale(1.1);
-  color: #ff3b30;
+.heart-btn:hover svg,
+.heart-btn.active svg {
+  transform: scale(1.12);
+  color: #ff375f;
 }
 
 .heart-btn.active {
-  background: linear-gradient(135deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
-  animation: heartPulse 0.6s ease;
+  background: linear-gradient(135deg, #ff9ebd, #ff375f);
+  box-shadow: 0 14px 28px rgba(255, 55, 95, 0.24);
 }
 
-.heart-btn.active svg {
+.product-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0b172a;
+  margin-bottom: 6px;
+}
+
+.product-card p {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.product-card b {
+  font-size: 18px;
+  color: #0a84ff;
+}
+
+.add-btn,
+.checkout-btn {
+  background: linear-gradient(135deg, #0a84ff, #147ce5);
   color: #fff;
-  transform: scale(1.25);
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.7));
+  font-weight: 700;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 12px 26px rgba(10, 132, 255, 0.22);
 }
 
-@keyframes heartPulse {
-  0% {
-    transform: scale(0.9);
-  }
-  40% {
-    transform: scale(1.3);
-  }
-  70% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
+.add-btn:hover,
+.checkout-btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.96;
 }
 
-/* ====== Скелетон ====== */
-.skeleton {
-  background: rgba(240, 240, 240, 0.9);
+.no-products {
+  color: #6b7280;
+  font-size: 15px;
+  padding: 24px;
+}
+
+.loading-spinner {
+  margin: 24px auto;
+  color: #0a84ff;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 22px;
-  min-height: 360px;
+  padding: 24px;
+  width: min(900px, 92vw);
+  box-shadow: 0 24px 60px rgba(6, 33, 68, 0.24);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-header h2 {
+  font-size: 22px;
+  color: #0b172a;
+}
+
+.close-btn {
+  background: rgba(15, 23, 42, 0.08);
+  border: none;
+  border-radius: 12px;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.modal-img img {
   width: 100%;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
-  animation: pulse 1.6s infinite ease-in-out;
+  border-radius: 16px;
+  background: #f7f8fa;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 12px 26px rgba(6, 33, 68, 0.1);
 }
 
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 0.9;
-  }
-  50% {
-    opacity: 0.5;
-  }
+.modal-text h3 {
+  font-size: 24px;
+  margin-bottom: 8px;
+  color: #0b172a;
 }
 
-/* ====== Адаптив ====== */
+.modal-text p {
+  color: #4b5563;
+  margin-bottom: 8px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 @media (max-width: 768px) {
   .products-page {
-    padding: 60px 16px;
+    padding: 80px 10px 40px;
   }
+
   .product-grid {
-    gap: 22px;
+    gap: 16px;
   }
+
   .product-card {
-    max-width: 230px;
-    min-height: 320px;
+    max-width: 240px;
+    padding: 18px 14px;
+  }
+
+  .product-img,
+  .product-thumb img {
+    height: 150px;
+  }
+
+  .modal-content {
     padding: 18px;
   }
-  .product-img {
-    height: 150px;
+
+  .modal-body {
+    grid-template-columns: 1fr;
   }
 }

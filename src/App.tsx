@@ -16,7 +16,6 @@ import ChatWidget from "./components/ChatWidget/ChatWidget";
 const App: React.FC = () => {
   const { initialized } = useAuth();
 
-  // ⛔ Показываем "Loading" только при первом запуске
   if (!initialized) {
     return (
       <div style={{ textAlign: "center", marginTop: "50px" }}>Loading...</div>

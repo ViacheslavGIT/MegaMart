@@ -65,12 +65,10 @@ export const ProductsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   }, [page, hasMore, loading]);
 
-  // 🔁 Загружаем при первом рендере и при изменении фильтров
   useEffect(() => {
     fetchProducts(1, false);
   }, [fetchProducts, JSON.stringify(filters)]);
 
-  // 📜 Загружаем следующую страницу, когда page изменился
   useEffect(() => {
     if (page > 1) fetchProducts(page, true);
   }, [page, fetchProducts]);

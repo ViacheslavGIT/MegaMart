@@ -20,7 +20,6 @@ const Products: React.FC = () => {
   const [favorites, setFavorites] = useState<string[]>([]);
   const token = localStorage.getItem("token");
 
-  // ✅ Загрузка товаров при изменении фильтров
   useEffect(() => {
     const filters: { category?: string; brand?: string } = {};
     if (category) filters.category = category;
@@ -28,12 +27,10 @@ const Products: React.FC = () => {
     reload(filters);
   }, [category, brand, reload]);
 
-  // 🔒 Блокировка скролла при модалке
   useEffect(() => {
     document.body.classList.toggle("no-scroll", !!selectedProduct);
   }, [selectedProduct]);
 
-  // ❤️ Загрузка избранного
   useEffect(() => {
     if (!isUser || !token) return;
     const fetchFavorites = async () => {
@@ -54,7 +51,6 @@ const Products: React.FC = () => {
     fetchFavorites();
   }, [isUser, token]);
 
-  // ❤️ Добавление / удаление из избранного
   const toggleFavorite = async (productId: string) => {
     if (!isUser || !token) {
       alert("Please log in to add favorites.");
@@ -77,7 +73,6 @@ const Products: React.FC = () => {
     }
   };
 
-  // ♾️ Infinite Scroll
   useEffect(() => {
     const handleScroll = () => {
       if (

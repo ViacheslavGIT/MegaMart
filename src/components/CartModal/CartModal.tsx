@@ -27,7 +27,6 @@ const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 
   if (!open) return null;
 
-  // Если нажали Place an order → показать форму Checkout
   if (showCheckout)
     return (
       <div className="cart-overlay show">
