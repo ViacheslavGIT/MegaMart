@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
-/* ====== Контейнер верхнего уровня ====== */
+
 .contact-wrapper {
   width: 100%;
   display: flex;
@@ -24,7 +24,7 @@
   animation: fadeSmooth 0.6s ease forwards;
 }
 
-/* ====== Анимация плавного появления ====== */
+
 @keyframes fadeSmooth {
   from {
     opacity: 0;
@@ -34,7 +34,7 @@
   }
 }
 
-/* ====== Заголовки ====== */
+
 .contact-title {
   font-size: 40px;
   font-weight: 700;
@@ -67,7 +67,7 @@
   }
 }
 
-/* ====== Контент ====== */
+
 .contact-content {
   width: 100%;
   display: flex;
@@ -79,7 +79,7 @@
   opacity: 0;
 }
 
-/* ====== Карточки ====== */
+
 .contact-grid {
   width: 100%;
   display: grid;
@@ -120,7 +120,7 @@
   margin: 4px 0;
 }
 
-/* ====== Карта ====== */
+
 .map-wrapper {
   width: 100%;
   display: flex;
@@ -152,7 +152,7 @@
   box-shadow: 0 18px 50px rgba(0, 122, 255, 0.15);
 }
 
-/* ====== Стеклянный свет под текстом ====== */
+
 .contact-title::after,
 .contact-subtitle::after {
   content: '';
@@ -164,7 +164,7 @@
   border-radius: 2px;
 }
 
-/* ====== Мобильная адаптация ====== */
+
 @media (max-width: 768px) {
   .contact-title {
     font-size: 30px;

@@ -14,7 +14,7 @@ export default function Login() {
   const { loginAsUser } = useAuth();
 
   const handleLogin = async () => {
-    if (!email || !password) return; // защита от клика без ввода
+    if (!email || !password) return;
 
     setError("");
     setMessage("");

@@ -22,7 +22,6 @@ const CheckoutForm: React.FC = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ Получаем email, если юзер авторизован
   useEffect(() => {
     if (isUser) {
       const storedEmail = localStorage.getItem("userEmail");
@@ -30,7 +29,6 @@ const CheckoutForm: React.FC = () => {
     }
   }, [isUser]);
 
-  // ✅ Проверяем источник (HeroBanner или корзина)
   useEffect(() => {
     const singleProduct = localStorage.getItem("checkoutProduct");
     if (singleProduct) {

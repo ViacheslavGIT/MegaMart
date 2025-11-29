@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
 
-/* ===== Контейнер ===== */
+
 .brands-row {
   display: flex;
   justify-content: center;
@@ -10,14 +10,14 @@
   margin: 50px auto;
   width: 100%;
   max-width: 900px;
-  min-height: 70px; /* предотвращает "прыжок" */
+  min-height: 70px; 
   transition: opacity 0.4s ease, transform 0.4s ease;
   opacity: 1;
   transform: translateY(0);
   font-family: 'Montserrat', sans-serif;
 }
 
-/* Состояния загрузки */
+
 .brands-row.loading {
   opacity: 0;
   visibility: hidden;
@@ -30,7 +30,7 @@
   transform: translateY(0);
 }
 
-/* ===== Элемент бренда ===== */
+
 .brand-link {
   display: inline-flex;
   align-items: center;
@@ -50,7 +50,7 @@
   overflow: hidden;
 }
 
-/* Hover эффект */
+
 .brand-link:hover {
   transform: translateY(-3px);
   background: linear-gradient(135deg, #00c853, #009624);
@@ -58,14 +58,14 @@
   box-shadow: 0 10px 24px rgba(0, 200, 83, 0.35);
 }
 
-/* Активный бренд */
+
 .brand-link.active {
   background: linear-gradient(135deg, #00c853, #009624);
   color: #fff;
   box-shadow: 0 8px 22px rgba(0, 122, 255, 0.3);
 }
 
-/* Световой эффект при ховере */
+
 .brand-link::after {
   content: '';
   position: absolute;
@@ -80,7 +80,7 @@
   opacity: 1;
 }
 
-/* ===== Скелет-заглушка ===== */
+
 .brand-skeleton {
   width: 100px;
   height: 40px;
@@ -101,7 +101,7 @@
   }
 }
 
-/* ===== Плавное появление ===== */
+
 @keyframes fadeSmooth {
   from {
     opacity: 0;
@@ -113,7 +113,7 @@
   }
 }
 
-/* ===== Мобильная адаптация ===== */
+
 @media (max-width: 768px) {
   .brands-row {
     gap: 14px;

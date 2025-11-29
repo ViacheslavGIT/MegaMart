@@ -16,7 +16,6 @@ const BrandsRow: React.FC = () => {
   const categoryKey = category?.toLowerCase() || "smartphones"
   const brands = brandsByCategory[categoryKey] || []
 
-  // Эффект для плавного появления
   useEffect(() => {
     setLoaded(false)
     const timeout = setTimeout(() => setLoaded(true), 100)
@@ -37,8 +36,7 @@ const BrandsRow: React.FC = () => {
             {brand}
           </NavLink>
         ))
-        : // если нет брендов — рисуем скелеты, чтобы не прыгало
-        Array.from({ length: 3 }).map((_, i) => (
+        : Array.from({ length: 3 }).map((_, i) => (
           <div key={i} className="brand-skeleton"></div>
         ))}
     </div>

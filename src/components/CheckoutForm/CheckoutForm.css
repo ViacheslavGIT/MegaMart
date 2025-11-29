@@ -13,7 +13,7 @@
   background: linear-gradient(135deg, #fdfbfb, #ebedee);
 }
 
-/* ====== ОСНОВНАЯ ФОРМА ====== */
+
 .checkout-form {
   display: flex;
   flex-direction: column;
@@ -40,7 +40,7 @@
   letter-spacing: -0.3px;
 }
 
-/* ====== СВОДКА ЗАКАЗА ====== */
+
 .checkout-summary {
   display: flex;
   flex-direction: column;
@@ -113,7 +113,7 @@
   color: #111;
 }
 
-/* ====== ЕСЛИ ПУСТО ====== */
+
 .empty-msg {
   text-align: center;
   color: #777;
@@ -121,7 +121,7 @@
   padding: 8px;
 }
 
-/* ====== ПОЛЯ ====== */
+
 .form-row {
   display: flex;
   flex-direction: column;
@@ -152,7 +152,7 @@
   outline: none;
 }
 
-/* ====== ОШИБКИ ====== */
+
 .error-text {
   text-align: center;
   color: #ff3b30;
@@ -164,7 +164,7 @@
   animation: fadeIn 0.4s ease;
 }
 
-/* ====== КНОПКА ПОКУПКИ ====== */
+
 .checkout-form button {
   margin-top: 10px;
   padding: 14px;
@@ -189,7 +189,7 @@
   cursor: not-allowed;
 }
 
-/* ====== СООБЩЕНИЕ ОБ УСПЕХЕ ====== */
+
 .checkout-success {
   display: flex;
   justify-content: center;
@@ -220,7 +220,7 @@
   font-size: 15px;
 }
 
-/* ====== АНИМАЦИИ ====== */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -243,7 +243,7 @@
   }
 }
 
-/* ====== АДАПТИВ ====== */
+
 @media (max-width: 480px) {
   .checkout-form {
     padding: 22px 20px;
