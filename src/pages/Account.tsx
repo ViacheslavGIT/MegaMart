@@ -38,7 +38,6 @@ const Account: React.FC = () => {
   const [loadingFav, setLoadingFav] = useState(true);
   const [loadingOrders, setLoadingOrders] = useState(true);
 
-  // ✅ Проверка токена и email
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token && !userEmail) {
@@ -57,7 +56,6 @@ const Account: React.FC = () => {
     }
   }, [userEmail, navigate, logout, setUserEmail]);
 
-  // ✅ Загрузка избранных
   const fetchFavorites = useCallback(async () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -88,7 +86,6 @@ const Account: React.FC = () => {
     }
   }, []);
 
-  // ✅ Загрузка заказов
   const fetchOrders = useCallback(async () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -111,7 +108,6 @@ const Account: React.FC = () => {
     }
   }, []);
 
-  // 🔄 Загружаем при первом рендере и при смене юзера
   useEffect(() => {
     if (userEmail) {
       fetchFavorites();
@@ -135,7 +131,6 @@ const Account: React.FC = () => {
     <div className="account-page fade-in">
       <h1 className="account-title">Welcome, {userEmail}</h1>
 
-      {/* ===== Избранные ===== */}
       <p className="account-subtitle">Your favorite products:</p>
       {loadingFav ? (
         <p>Loading favorites...</p>
@@ -161,7 +156,6 @@ const Account: React.FC = () => {
         </div>
       )}
 
-      {/* ===== Заказы ===== */}
       <h2 className="account-subtitle">Your orders:</h2>
       {loadingOrders ? (
         <p>Loading orders...</p>
@@ -192,7 +186,6 @@ const Account: React.FC = () => {
         </div>
       )}
 
-      {/* ===== Кнопка выхода ===== */}
       <button
         className="logout-btn"
         onClick={() => {

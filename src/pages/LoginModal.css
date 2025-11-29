@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600&display=swap');
 
-/* ——— Фон модалки ——— */
+
 .login-wrapper {
   position: fixed;
   inset: 0;
@@ -22,7 +22,7 @@
   }
 }
 
-/* ——— Модальное окно ——— */
+
 .login-container {
   width: 100%;
   max-width: 460px;
@@ -55,7 +55,7 @@
   }
 }
 
-/* ——— Кнопка закрытия ——— */
+
 .close-login-btn {
   position: absolute;
   top: 16px;
@@ -73,7 +73,7 @@
   transform: rotate(90deg);
 }
 
-/* ——— Контент и заголовок ——— */
+
 .login-content {
   display: flex;
   flex-direction: column;
@@ -88,7 +88,7 @@
   margin-bottom: 8px;
 }
 
-/* ——— Поля ввода ——— */
+
 .login-fields {
   width: 100%;
   display: flex;
@@ -114,7 +114,7 @@
   box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.25);
 }
 
-/* ——— Сообщения ——— */
+
 .error-msg {
   color: #ff3b30;
   font-weight: 600;
@@ -129,7 +129,7 @@
   margin-top: -6px;
 }
 
-/* ——— Кнопка отправки ——— */
+
 .login-submit {
   width: 100%;
   border: none;
@@ -149,7 +149,7 @@
   opacity: 0.95;
 }
 
-/* ——— Подвал формы ——— */
+
 .login-footer {
   display: flex;
   justify-content: center;
@@ -171,7 +171,7 @@
   color: #0056b3;
 }
 
-/* ——— Мобильная адаптация ——— */
+
 @media (max-width: 480px) {
   .login-box {
     padding: 50px 26px 40px;

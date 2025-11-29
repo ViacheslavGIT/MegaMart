@@ -34,7 +34,6 @@ export interface Product {
 }
 
 export const products: Product[] = [
-  // Smartphones
   {
     name: 'iPhone 15 Pro',
     brand: 'Apple',
@@ -116,7 +115,6 @@ export const products: Product[] = [
     img: huaweiP60,
   },
 
-  // Laptops
   {
     name: 'MacBook Pro 16 M3',
     brand: 'Apple',
@@ -159,7 +157,6 @@ export const products: Product[] = [
     img: samsung,
   },
 
-  // Headphones
   { name: 'AirPods Pro 2', brand: 'Apple', category: 'Headphones', price: 249, off: 10, img: pods },
   {
     name: 'Sony WH-1000XM5',
@@ -227,7 +224,6 @@ export const products: Product[] = [
     img: pods,
   },
 
-  // Watches
   {
     name: 'Apple Watch Ultra 2',
     brand: 'Apple',
@@ -281,7 +277,6 @@ export const products: Product[] = [
   { name: 'Fossil Gen 6', brand: 'Fossil', category: 'Watches', price: 299, off: 10, img: watch },
   { name: 'TicWatch Pro 5', brand: 'Mobvoi', category: 'Watches', price: 349, off: 9, img: watch },
 
-  // Other categories (placeholders)
   { name: 'Coming Soon', brand: '-', category: 'TVs', price: 0, off: 0 },
   { name: 'Coming Soon', brand: '-', category: 'Cameras', price: 0, off: 0 },
   { name: 'Coming Soon', brand: '-', category: 'Accessories', price: 0, off: 0 },

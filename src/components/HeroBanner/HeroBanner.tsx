@@ -40,7 +40,6 @@ export default function HeroBanner() {
     fetchRandomProduct();
   }, []);
 
-  // блокировка скролла при открытой модалке
   useEffect(() => {
     if (showCheckout) document.body.classList.add("cart-open");
     else document.body.classList.remove("cart-open");
@@ -112,7 +111,6 @@ export default function HeroBanner() {
         </div>
       </div>
 
-      {/* ===== Модалка с формой Checkout ===== */}
       {showCheckout && (
         <div className="cart-overlay show" onClick={() => setShowCheckout(false)}>
           <div

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import api from "../api/api"; // 👈 чтобы токен автоматом добавлялся в заголовки
+import api from "../api/api";
 
 interface AuthContextType {
   isAdmin: boolean;
@@ -41,7 +41,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setIsAdmin(!!payload.isAdmin);
         setUserEmail(payload.email);
         setToken(storedToken);
-        api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`; // ✅ автоматически добавляем токен
+        api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
       } catch {
         console.error("Invalid JWT token");
         localStorage.removeItem("token");
@@ -59,7 +59,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (token) {
       localStorage.setItem("token", token);
       setToken(token);
-      api.defaults.headers.common["Authorization"] = `Bearer ${token}`; // ✅ при логине сразу подставляем
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
     setIsUser(true);
     setIsAdmin(!!isAdmin);
@@ -69,7 +69,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userEmail");
-    delete api.defaults.headers.common["Authorization"]; // ❌ убираем токен из заголовков
+    delete api.defaults.headers.common["Authorization"];
     setIsAdmin(false);
     setIsUser(false);
     setUserEmail(null);
