@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Montserrat:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap');
 
 .hero {
   position: relative;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(14, 165, 233, 0.1)),
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(34, 193, 195, 0.12)),
     linear-gradient(180deg, #f9fafc 0%, #eef2f8 52%, #e9edf6 100%);
   padding: clamp(3rem, 6vw, 5rem) 1.5rem;
   display: flex;
@@ -10,8 +10,8 @@
   align-items: center;
   overflow: hidden;
   min-height: 520px;
-  font-family: 'Inter', 'Montserrat', sans-serif;
-  border-radius: 28px;
+  font-family: 'Inter', sans-serif;
+  border-radius: 26px;
   margin: 0 14px;
   box-shadow: 0 30px 80px rgba(15, 23, 42, 0.12);
 }
@@ -20,22 +20,22 @@
 .hero::after {
   content: '';
   position: absolute;
-  width: 380px;
-  height: 380px;
+  width: 360px;
+  height: 360px;
   border-radius: 50%;
   filter: blur(70px);
-  opacity: 0.35;
+  opacity: 0.32;
   z-index: 1;
 }
 
 .hero::before {
-  background: #7c5dff;
+  background: #7c3aed;
   top: -120px;
   left: -160px;
 }
 
 .hero::after {
-  background: #34d399;
+  background: #22c1c3;
   bottom: -120px;
   right: -140px;
 }
@@ -94,15 +94,31 @@
   font-weight: 700;
 }
 
-.hero-right img {
-  max-width: 420px;
-  border-radius: 24px;
+.hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-right .image-frame {
+  width: min(440px, 90vw);
+  aspect-ratio: 4 / 3;
+  border-radius: 22px;
+  padding: 16px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(245, 246, 255, 0.94));
   box-shadow: 0 22px 60px rgba(15, 23, 42, 0.12);
+  display: grid;
+  place-items: center;
+}
+
+.hero-right img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  transform: translateY(0);
-  transition: transform 0.6s ease;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(245, 246, 255, 0.9));
-  padding: 14px;
+  border-radius: 18px;
+  background: #fdfefe;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 10px 24px rgba(15, 23, 42, 0.1);
+  transition: transform 0.5s ease;
 }
 
 .hero:hover .hero-right img {
@@ -125,12 +141,12 @@
   color: #fff;
   cursor: pointer;
   backdrop-filter: blur(12px);
-  transition: all 0.25s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
 }
 
 .btn-glass.add {
-  background: linear-gradient(135deg, var(--accent-soft), #3bc3a3);
+  background: linear-gradient(135deg, var(--accent-soft), #5b8def);
 }
 
 .btn-glass.buy {
@@ -140,7 +156,7 @@
 .btn-glass:hover {
   opacity: 0.96;
   transform: translateY(-1px);
-  box-shadow: 0 16px 30px rgba(99, 102, 241, 0.18);
+  box-shadow: 0 16px 30px rgba(79, 70, 229, 0.18);
 }
 
 @keyframes slideUp {
@@ -170,9 +186,8 @@
     font-size: clamp(30px, 8vw, 42px);
   }
 
-  .hero-right img {
-    width: min(360px, 90vw);
-    margin-bottom: 10px;
+  .hero-right .image-frame {
+    width: min(360px, 92vw);
   }
 
   .hero-buttons {
@@ -197,53 +212,4 @@
 .cart-overlay.show {
   opacity: 1;
   pointer-events: auto;
-}
-
-.cart-modal.cart-fullscreen {
-  width: 100%;
-  max-width: 720px;
-  min-height: 70vh;
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  padding: 40px 30px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-  animation: fadeUp 0.4s ease forwards;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.cart-modal .close-btn {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  background: radial-gradient(circle at 30% 30%, #fff, #ddd);
-  border: none;
-  border-radius: 50%;
-  width: 38px;
-  height: 38px;
-  cursor: pointer;
-  color: #111;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-  transition: all 0.25s ease;
-}
-
-.cart-modal .close-btn:hover {
-  background: linear-gradient(135deg, #ff3b30, #d32f2f);
-  color: #fff;
-  transform: scale(1.05);
-  box-shadow: 0 6px 18px rgba(255, 59, 48, 0.25);
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(25px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap');
 
 .products-wrapper {
   width: 100%;
@@ -7,7 +7,7 @@
 
 .product-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 18px;
   padding: 24px 0;
 }
@@ -24,7 +24,7 @@
 
 .product-card:hover {
   transform: translateY(-1px);
-  box-shadow: 0 16px 34px rgba(99, 102, 241, 0.18);
+  box-shadow: 0 16px 34px rgba(79, 70, 229, 0.16);
 }
 
 .product-thumb {
